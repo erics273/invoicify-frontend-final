@@ -3,7 +3,7 @@
 npm i --save
 npm run start
 
-#####Build 
+##### Build 
 npm run build
-#####Test
+##### Test
 npm run test
