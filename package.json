@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build deploy": "ng build --base-href \"https://chickok.github.io/invoicify-frontend-final/\"",
+    "build-deploy": "ng build --base-href \"https://chickok.github.io/invoicify-frontend-final/\"",
     "deploy": "ngh"
   },
   "private": true,
