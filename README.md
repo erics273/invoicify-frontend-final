@@ -7,3 +7,8 @@ npm run start
 npm run build
 ##### Test
 npm run test
+#### Deploy
+```bash
+npm run build deploy
+npm run deploy
+```

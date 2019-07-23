@@ -11,7 +11,7 @@ import 'rxjs/add/observable/empty';
 @Injectable()
 export class DataService {
 
-    private baseUrl = 'http://localhost:8080/api/'
+    private baseUrl = 'https://invoicify-buzzword.herokuapp.com/api/'
 
     found = false;
 
