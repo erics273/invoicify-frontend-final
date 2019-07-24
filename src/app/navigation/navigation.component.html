@@ -42,6 +42,9 @@
                 <li *ngIf="authService.isAuthenticated()" routerLinkActive="active">
                     <a routerLink="/user">Users</a>
                 </li>
+                <li *ngIf="authService.isAuthenticated()" routerLinkActive="active">
+                    <a routerLink="/analytics">Analytics</a>
+                </li>
             </ul>
         </div>
     </div>

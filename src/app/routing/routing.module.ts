@@ -12,6 +12,7 @@ import { BillingRecordComponent } from '../billing-record/billing-record.compone
 import { BillingRecordFormComponent } from '../billing-record-form/billing-record-form.component';
 import { InvoiceFormComponent } from '../invoice-form/invoice-form.component';
 import { InvoiceComponent } from '../invoice/invoice.component';
+import { AnalyticsComponent } from 'app/analytics/analytics.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'billing-record',  component: BillingRecordComponent, canActivate: [AuthGuard] },
   { path: 'billing-record/add', component: BillingRecordFormComponent, canActivate: [AuthGuard] },
   { path: 'invoice/add', component: InvoiceFormComponent, canActivate: [AuthGuard] },
-  { path: 'invoice', component: InvoiceComponent, canActivate: [AuthGuard] }
+  { path: 'invoice', component: InvoiceComponent, canActivate: [AuthGuard] },
+  { path: 'analytics', component: AnalyticsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
