@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'app/data.service';
 import { ActivatedRoute } from '@angular/router';
+import { fadeInAnimation } from 'app/animations/fade-in.animation';
 
 @Component({
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
-  styleUrls: ['./analytics.component.css']
+  styleUrls: ['./analytics.component.css'],
+  animations: [fadeInAnimation]
+
 })
 export class AnalyticsComponent implements OnInit {
 
@@ -15,8 +18,7 @@ export class AnalyticsComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private route: ActivatedRoute,
-    private location: Location
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {

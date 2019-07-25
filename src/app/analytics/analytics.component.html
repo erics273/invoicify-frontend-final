@@ -1,21 +1,7 @@
 <section @fadeInAnimation>
-  <ol class="breadcrumb">
-    <li>
-      <a routerLink="/home">Home</a>
-    </li>
-    <li>
-      <a routerLink="/billing-record">Billing Records</a>
-    </li>
-    <li class="active">Manage Billing Record</li>
-  </ol>
+  
 
-  <a class="btn btn-primary" routerLink="/billing-record">Return to Billing Records</a>
 
-  <h1>Manage Billing Record</h1>
-
-  <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
-
-  <!-- <form (ngSubmit)="saveBilingRecord(billingRecordForm)" #billingRecordForm="ngForm" class="form-horizontal"> -->
 
     <div class="form-group">
       <label for="client" class="col-sm-2 control-label">Client</label>
@@ -32,6 +18,5 @@
 
 
 
-    
-  <!-- </form> -->
+
 </section>
