@@ -1,3 +1,37 @@
-<p>
-  analytics works!
-</p>
+<section @fadeInAnimation>
+  <ol class="breadcrumb">
+    <li>
+      <a routerLink="/home">Home</a>
+    </li>
+    <li>
+      <a routerLink="/billing-record">Billing Records</a>
+    </li>
+    <li class="active">Manage Billing Record</li>
+  </ol>
+
+  <a class="btn btn-primary" routerLink="/billing-record">Return to Billing Records</a>
+
+  <h1>Manage Billing Record</h1>
+
+  <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
+
+  <!-- <form (ngSubmit)="saveBilingRecord(billingRecordForm)" #billingRecordForm="ngForm" class="form-horizontal"> -->
+
+    <div class="form-group">
+      <label for="client" class="col-sm-2 control-label">Client</label>
+      <div class="col-sm-10">
+        <select required [ngModel]="null" ngModel #client="ngModel" class="form-control" id="client" name="client">
+          <option [ngValue]="null">-- Select Client --</option>
+          <option *ngFor="let company of companies" [ngValue]="company.id">
+            {{ company.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+
+
+
+    
+  <!-- </form> -->
+</section>
