@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 export class NavigationComponent implements OnInit {
 
   auth_user;
-
+  
   errorMessage: string;
   successMessage: string;
 
