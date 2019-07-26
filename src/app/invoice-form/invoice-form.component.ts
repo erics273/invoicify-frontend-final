@@ -19,6 +19,7 @@ export class InvoiceFormComponent implements OnInit {
   @ViewChild('invoiceForm') currentForm: NgForm;
 
   successMessage: string;
+  selectedClient: string = null;
   errorMessage: string;
   billingRecords: any[];
   companies: any[];
@@ -29,13 +30,13 @@ export class InvoiceFormComponent implements OnInit {
     private location: Location
   ) { }
 
-  ngOnInit() { 
-    this.getBillingRecords(); 
+  ngOnInit() {
+    // this.getBillingRecords();
     this.getCompanies();
   }
 
-  getBillingRecords() {
-    this.dataService.getRecords("billing-record")
+  getBillingRecordsById(id) {
+    this.dataService.getRecords("billing-record/" + id)
       .subscribe(
         results => this.billingRecords = results,
         error => this.errorMessage = <any>error);
