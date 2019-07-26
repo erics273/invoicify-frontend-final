@@ -19,7 +19,7 @@
     <div class="form-group">
       <label for="client" class="col-sm-2 control-label">Client</label>
       <div class="col-sm-10">
-        <select required [ngModel]="null" ngModel #client="ngModel" class="form-control" id="client" name="client">
+        <select required [(ngModel)]="selectedClient" ngModel #client="ngModel" class="form-control" id="client" name="client" (change)=getBillingRecordsById(selectedClient)>
           <option [ngValue]="null">-- Select Client --</option>
           <option *ngFor="let company of companies" [ngValue]="company.id">
             {{ company.name }}

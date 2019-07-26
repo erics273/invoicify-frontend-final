@@ -12,6 +12,7 @@ import 'rxjs/add/observable/empty';
 export class DataService {
 
     private baseUrl = 'https://invoicify-buzzword.herokuapp.com/api/'
+    // private baseUrl = 'http://localhost:8080/api/'
 
     found = false;
 
@@ -72,7 +73,7 @@ export class DataService {
                 }
             } catch (error) {
                 errMsg = error._body;
-            } 
+            }
         }else{
             if (error instanceof Response) {
                 if(error.status === 0){
