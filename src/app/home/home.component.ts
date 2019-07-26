@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { fadeInAnimation } from '../animations/fade-in.animation';
+import { AuthService } from 'app/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +13,16 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  auth_user;
+
+  constructor(private authService: AuthService, public router: Router) { }
 
   ngOnInit() {
+    this.refreshUser();
+  }
+
+  refreshUser(){
+    this.auth_user = JSON.parse(localStorage.getItem("auth_user"));
   }
 
 }
