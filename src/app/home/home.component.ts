@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   private htmlElement: HTMLElement;
   private host: d3.Selection<HTMLElement, any, any, any>;
 
-  private margin = {top: 40, right: 20, bottom: 30, left: 70};
+  private margin = {top: 40, right: 20, bottom: 40, left: 70};
   private width: number;
   private height: number;
   private x: any;
@@ -124,7 +124,7 @@ export class HomeComponent implements OnInit {
     this.svg.append("svg:text")
           .attr("class", "x axis-label")
           .attr("x", this.height/2 + this.margin.left)
-          .attr("y", this.width/2 + this.margin.bottom*3 + this.margin.top*3 + 10)
+          .attr("y", this.width/2 + this.margin.bottom*2 + this.margin.top + 10)
           .text("Month")
           .style('font-weight', "bold")
           .style("font-size", 20);
