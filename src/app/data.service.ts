@@ -27,6 +27,13 @@ export class DataService {
             .catch(this.handleError);
     }
 
+    getHomeRecords(endpoint: string, id: number, data: string): Observable<any[]> {
+        let apiUrl = `${this.baseUrl}${endpoint}/${id}/${data}`;
+        return this.http.get(apiUrl, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     getRecord(endpoint: string, id:number): Observable<object> {
         let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
         return this.http.get(apiUrl, this.options)
@@ -55,7 +62,6 @@ export class DataService {
         return this.http.post(apiUrl, record, this.options)
             .map(this.extractData);
     }
-
 
     private extractData(res: Response) {
         let results = res.json();
@@ -87,6 +93,4 @@ export class DataService {
 
         return Observable.throw(errMsg);
     }
-
-
 }
