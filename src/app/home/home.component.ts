@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   private htmlElement: HTMLElement;
   private host: d3.Selection<HTMLElement, any, any, any>;
 
-  private margin = {top: 20, right: 20, bottom: 30, left: 70};
+  private margin = {top: 40, right: 20, bottom: 30, left: 70};
   private width: number;
   private height: number;
   private x: any;
@@ -177,7 +177,7 @@ export class HomeComponent implements OnInit {
                 .style("fill", "white")
                 .style("stroke", "green");
               label.attr("transform", "translate("+ ((d: any) => this.x(d.month)) +"," + ((d: any) => this.y(d.value)) +")");
-              label.text("[ " +d.value+ " ]");
+              label.text("" +d.month+ ": " +d.value);
             })
     //         .on("mouseover", mouseOver)
             .on("mouseout", mouseOut);
@@ -203,7 +203,7 @@ export class HomeComponent implements OnInit {
     var curtain = this.svg.append("svg:rect")
             .attr('x', -1 * this.width - 10)
             .attr('y', -1 * this.height - 10)
-            .attr('height', this.height + 15)
+            .attr('height', this.height + 20)
             .attr('width', this.width + 5)
             .attr('class', 'curtain')
             .attr('transform', 'rotate(180)')
