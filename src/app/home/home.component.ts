@@ -19,6 +19,7 @@ import 'svg-builder';
   animations: [fadeInAnimation],
   host: { '[@fadeInAnimation]': '' }
 })
+
 export class HomeComponent implements OnInit {
   private htmlElement: HTMLElement;
   private host: d3.Selection<HTMLElement, any, any, any>;
@@ -30,32 +31,12 @@ export class HomeComponent implements OnInit {
   private y: any;
   private svg: any;
   private line: d3Shape.Line<[number, number]>;
-  private apiData = [
-    {
-      "month": "jan",
-      "value": 5
-    },{
-      "month": "feb",
-      "value": 8
-    },{
-      "month": "mar",
-      "value": 11
-    },{
-      "month": "apr",
-      "value": 7
-    },{
-      "month": "may",
-      "value": 6
-    },{
-      "month": "jun",
-      "value": 10
-    }
-  ];
-  realApiData: any[];
+
   auth_user;
   errorMessage: string;
   successMessage: string;
   invoices: any[];
+  apiData: any[];
 
   constructor(private authService: AuthService, private dataService: DataService, public router: Router, private elementRef: ElementRef) { 
     this.htmlElement = elementRef.nativeElement;
@@ -67,11 +48,11 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     await this.refreshUser();
     await this.getTableInvoices();
-    this.getAnalytics();
-    this.initSvg();
-    this.initAxis();
-    this.drawAxis();
-    this.drawLine();
+    await this.getGraphInvoices();
+    await this.initSvg();
+    await this.initAxis();
+    await this.drawAxis();
+    await this.drawLine();
   }
 
   async refreshUser(): Promise<any> {
@@ -87,27 +68,27 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  private getAnalytics() {
-    this.dataService.getRecords("analytics") // need to make an analytics-service.ts and hook up
+  async getGraphInvoices(): Promise<any> {
+    this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "graph")
     .subscribe(
-      results => this.realApiData = results,
+      results => this.apiData = results,
       error =>  this.errorMessage = <any>error);
   }
 
-  private initSvg() {
+  async initSvg() {
     this.svg = this.host.select('#chartsvg')
                  .append('svg:g')
                  .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
   }
 
-  private initAxis() {
+  async initAxis() {
     this.x = d3Scale.scaleBand().range([0, this.width]);
     this.y = d3Scale.scaleLinear().range([this.height, 0]);
     this.x.domain(this.apiData.map(function(d) { return d.month; } ));
     this.y.domain(d3Array.extent(this.apiData, function(d) { return d.value; } ));
   }
 
-  private drawAxis() {
+  async drawAxis() {
 
     this.svg.append("svg:g")
           .attr("class", "axis axis--x")
@@ -140,7 +121,7 @@ export class HomeComponent implements OnInit {
           .style("font-size", 20);
   }
 
-  private drawLine() {
+  async drawLine() {
     this.line = d3Shape.line()
                        .curve(d3Shape.curveMonotoneX)
                        .x( (d: any) => this.x(d.month) )
