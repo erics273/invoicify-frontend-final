@@ -10,7 +10,7 @@ import 'svg-builder';
 import { DataService } from '../data.service'
 
 // TODO:
-// - Get text tooltip to show up
+// - Get text tooltip to show up in the right place
 // - Hook up to API call instead of dummy apiData
 // - Probably a bunch of refactoring, but low priority
 // - Create 2nd chart for Analytics page
@@ -72,7 +72,7 @@ export class AnalyticsComponent implements OnInit {
   }
 
   private getAnalytics() {
-    this.dataService.getRecords("get-analytics") // need to make an analytics-service.ts and hook up
+    this.dataService.getRecords("analytics") // need to make an analytics-service.ts and hook up
     .subscribe(
       results => this.realApiData = results,
       error =>  this.errorMessage = <any>error);
@@ -141,6 +141,7 @@ export class AnalyticsComponent implements OnInit {
             .style("stroke-linejoin", "round")
             .style('stroke-width', 3);
 
+    var label = d3.select(".label");
     this.svg.selectAll(".dot")
             .data(this.apiData)
             .enter()
@@ -155,19 +156,27 @@ export class AnalyticsComponent implements OnInit {
             .style("stroke-linecap", "round")
             .style("stroke-linejoin", "round")
             .style('stroke-width', 3)
-            .on("mouseover", mouseOver)
-            .on("mouseout", mouseOut);;
-    function mouseOver(d, i) {
-      d3.select(this)
-        .attr("r", 8)
-        .style("fill", "white")
-        .style("stroke", "green");
-      // this.svg.append("svg:g")
-      //         .attr("id", "t" + d.x + "-" + d.y + "-" + i)
-      //         .attr("x", function(d) { return this.x(d.x); })
-      //         .attr("y", function(d) { return this.y(d.y); })
-      //         .text(function() { return [d.x, d.y]; });
-    }
+            .on("mouseover", function(d) {
+              d3.select(this)
+                .attr("r", 8)
+                .style("fill", "white")
+                .style("stroke", "green");
+              label.attr("transform", "translate("+ ((d: any) => this.x(d.month)) +"," + ((d: any) => this.y(d.value)) +")");
+              label.text("[ " +d.value+ " ]");
+            })
+    //         .on("mouseover", mouseOver)
+            .on("mouseout", mouseOut);
+    // function mouseOver(d, i) {
+    //   d3.select(this)
+    //     .attr("r", 8)
+    //     .style("fill", "white")
+    //     .style("stroke", "green");
+    //   this.svg.append("svg:g")
+    //           .attr("id", "t" + d.x + "-" + d.y + "-" + i)
+    //           .attr("x", function(d) { return this.x(d.x); })
+    //           .attr("y", function(d) { return this.y(d.y); })
+    //           .text(function() { return [d.x, d.y]; });
+    // }
     function mouseOut(d, i) {
       d3.select(this)
         .attr("r", 5)
