@@ -18,14 +18,20 @@
   <li class="active">Analytics</li>
 </ol>
   
-<h2>Client Analytics</h2>
+
 
 <body>
-    <div id="main">
+    <div id="main" style = "margin-bottom: 50px;">
+        <h2 style="font-weight: bold">Client Analytics</h2>
         <svg id="chartsvg" width="700" height="500" style="border: 1px solid #777;">
         </svg>
+        <p class="label">TEST</p>
     </div>
-    <p class="label">TEST</p>
+    <div id = "userChart">
+      <h2 style = "font-weight: bold">My Analytics</h2>
+      <svg id = "user_svg" width = "700" height ="500" style = "border: 1px solid #777;"></svg>
+      <p class = "userLabel">TEST</p>
+    </div>
 </body>
 <style>
   .label {
@@ -33,5 +39,11 @@
     font-size: 14px;
     color: purple;
   }
+  .userLabel {
+    position:absolute;
+    font-size: 14px;
+    color: purple;
+    font-weight: bold;
+  }  
 </style>
 <script src="https://d3js.org/d3.v5.min.js"></script>
