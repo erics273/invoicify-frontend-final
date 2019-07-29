@@ -30,7 +30,7 @@ export class AnalyticsComponent implements OnInit {
 
   private htmlElement2: HTMLElement; 
 
-  private margin = {top: 20, right: 20, bottom: 30, left: 70};
+  private margin = {top: 40, right: 20, bottom: 30, left: 70};
   private width: number;
   private height: number;
   private x: any;
@@ -38,7 +38,7 @@ export class AnalyticsComponent implements OnInit {
   private svg: any;
   private line: d3Shape.Line<[number, number]>;
 
-  private user_margin = {top: 20, right: 20, bottom: 30, left: 70};
+  private user_margin = {top: 40, right: 20, bottom: 30, left: 70};
   private user_width: number;
   private user_height: number;
   private user_x: any;
@@ -260,7 +260,7 @@ export class AnalyticsComponent implements OnInit {
                 .style("fill", "white")
                 .style("stroke", "green");
               label.attr("transform", "translate("+ ((d: any) => this.x(d.month)) +"," + ((d: any) => this.y(d.value)) +")");
-              label.text("[ " +d.value+ " ]");
+              label.text("" +d.month+ ": " +d.value);
             })
     //         .on("mouseover", mouseOver)
             .on("mouseout", mouseOut);
@@ -284,9 +284,9 @@ export class AnalyticsComponent implements OnInit {
     }
 
     var curtain = this.svg.append("svg:rect")
-            .attr('x', -1 * this.width)
-            .attr('y', -1 * this.height)
-            .attr('height', this.height + 15)
+            .attr('x', -1 * this.width - 10)
+            .attr('y', -1 * this.height- 10)
+            .attr('height', this.height + 20)
             .attr('width', this.width + 5)
             .attr('class', 'curtain')
             .attr('transform', 'rotate(180)')
@@ -338,7 +338,7 @@ export class AnalyticsComponent implements OnInit {
                 .style("fill", "white")
                 .style("stroke", "green");
               user_label.attr("transform", "translate("+ ((d: any) => this.x(d.month)) +"," + ((d: any) => this.y(d.value)) +")");
-              user_label.text("[ " +d.value+ " ]");
+              user_label.text("" +d.month+ ": " +d.value);
             })
     //         .on("mouseover", mouseOver)
             .on("mouseout", mouseOut);
@@ -364,7 +364,7 @@ export class AnalyticsComponent implements OnInit {
     var user_curtain = this.user_svg.append("svg:rect")
             .attr('x', -1 * this.user_width)
             .attr('y', -1 * this.user_height)
-            .attr('height', this.user_height + 15)
+            .attr('height', this.user_height + 20)
             .attr('width', this.user_width + 5)
             .attr('class', 'user_curtain')
             .attr('transform', 'rotate(180)')
