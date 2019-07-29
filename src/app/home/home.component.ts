@@ -201,8 +201,8 @@ export class HomeComponent implements OnInit {
     }
 
     var curtain = this.svg.append("svg:rect")
-            .attr('x', -1 * this.width)
-            .attr('y', -1 * this.height)
+            .attr('x', -1 * this.width - 10)
+            .attr('y', -1 * this.height - 10)
             .attr('height', this.height + 15)
             .attr('width', this.width + 5)
             .attr('class', 'curtain')
