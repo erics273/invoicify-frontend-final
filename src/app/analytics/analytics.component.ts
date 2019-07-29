@@ -1,10 +1,7 @@
 import { ElementRef, Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { DataService } from 'app/data.service'
 import { ActivatedRoute } from '@angular/router';
 import { fadeInAnimation } from 'app/animations/fade-in.animation';
-=======
->>>>>>> 28d703331df5d6844f2e0654d0e648d621bdd797
 import * as d3 from 'd3-selection';
 import * as d3Scale from "d3-scale";
 import * as d3Shape from "d3-shape";
@@ -13,10 +10,6 @@ import * as d3Axis from "d3-axis";
 import * as d3Format from "d3-format"
 import * as d3Transition from "d3-transition";
 import 'svg-builder';
-<<<<<<< HEAD
-=======
-import { DataService } from '../data.service'
->>>>>>> 28d703331df5d6844f2e0654d0e648d621bdd797
 
 // TODO:
 // - Get text tooltip to show up in the right place
@@ -65,16 +58,10 @@ export class AnalyticsComponent implements OnInit {
   ];
   realApiData: any[];
   errorMessage: string;
-<<<<<<< HEAD
   successMessage: string;
   companies: any[];
 
   constructor(private elementRef: ElementRef, private dataService: DataService, private route: ActivatedRoute) {
-=======
-  successmessage: string;
-
-  constructor(private elementRef: ElementRef, private dataService: DataService) {
->>>>>>> 28d703331df5d6844f2e0654d0e648d621bdd797
     this.htmlElement = elementRef.nativeElement;
     this.host = d3.select(this.htmlElement);
     this.width = 700 - this.margin.left - this.margin.right;
@@ -82,10 +69,7 @@ export class AnalyticsComponent implements OnInit {
   }
 
   ngOnInit() {
-<<<<<<< HEAD
     this.getCompanies(); 
-=======
->>>>>>> 28d703331df5d6844f2e0654d0e648d621bdd797
     this.getAnalytics();
     this.initSvg();
     this.initAxis();
@@ -93,16 +77,13 @@ export class AnalyticsComponent implements OnInit {
     this.drawLine();
   }
 
-<<<<<<< HEAD
   private getCompanies() {
     this.dataService.getRecords("company")
       .subscribe(
         companies => this.companies = companies,
-        error => this.errorMessage = <any>error
-      );
+        error => this.errorMessage = <any>error);
+  }
 
-=======
->>>>>>> 28d703331df5d6844f2e0654d0e648d621bdd797
   private getAnalytics() {
     this.dataService.getRecords("analytics") // need to make an analytics-service.ts and hook up
     .subscribe(
@@ -121,7 +102,6 @@ export class AnalyticsComponent implements OnInit {
     this.y = d3Scale.scaleLinear().range([this.height, 0]);
     this.x.domain(this.apiData.map(function(d) { return d.month; } ));
     this.y.domain(d3Array.extent(this.apiData, function(d) { return d.value; } ));
-<<<<<<< HEAD
   }
 
   private drawAxis() {
@@ -157,43 +137,6 @@ export class AnalyticsComponent implements OnInit {
           .style("font-size", 20);
   }
 
-=======
-  }
-
-  private drawAxis() {
-
-    this.svg.append("svg:g")
-          .attr("class", "axis axis--x")
-          .attr("transform", "translate(0," + this.height + ")")
-          .style("font-size", "12")
-          .style("font-variant", "small-caps")
-          .call(d3Axis.axisBottom(this.x));
-
-    this.svg.append("svg:g")
-          .attr("class", "axis axis--y")
-          .attr('transform', 'translate(0,0)')
-          .style("font-size", "12")
-          .call(d3Axis.axisLeft(this.y).tickFormat(d3Format.format("d")).ticks(this.apiData.length));
-
-    this.svg.append("svg:text")
-          .attr("class", "x axis-label")
-          .attr("x", this.height/2 + this.margin.left)
-          .attr("y", this.width/2 + this.margin.bottom*3 + this.margin.top*3 + 10)
-          .text("Month")
-          .style('font-weight', "bold")
-          .style("font-size", 20);
-
-    this.svg.append("svg:text")
-          .attr("class", "y axis-label")
-          .attr("x", -this.height/2 - this.margin.top - 15)
-          .attr("y", -this.margin.right - 10)
-          .attr("transform", "rotate(270)")
-          .text("Invoices")
-          .style('font-weight', "bold")
-          .style("font-size", 20);
-  }
-
->>>>>>> 28d703331df5d6844f2e0654d0e648d621bdd797
   private drawLine() {
     this.line = d3Shape.line()
                        .curve(d3Shape.curveMonotoneX)
