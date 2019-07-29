@@ -12,6 +12,11 @@ import * as d3Format from "d3-format"
 import * as d3Transition from "d3-transition";
 import 'svg-builder';
 
+export class GraphData {
+  month: string;
+  value: number;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,6 +24,7 @@ import 'svg-builder';
   animations: [fadeInAnimation],
   host: { '[@fadeInAnimation]': '' }
 })
+
 export class HomeComponent implements OnInit {
   private htmlElement: HTMLElement;
   private host: d3.Selection<HTMLElement, any, any, any>;
@@ -30,32 +36,12 @@ export class HomeComponent implements OnInit {
   private y: any;
   private svg: any;
   private line: d3Shape.Line<[number, number]>;
-  private apiData = [
-    {
-      "month": "jan",
-      "value": 5
-    },{
-      "month": "feb",
-      "value": 8
-    },{
-      "month": "mar",
-      "value": 11
-    },{
-      "month": "apr",
-      "value": 7
-    },{
-      "month": "may",
-      "value": 6
-    },{
-      "month": "jun",
-      "value": 10
-    }
-  ];
-  realApiData: any[];
+
   auth_user;
   errorMessage: string;
   successMessage: string;
   invoices: any[];
+  apiData: GraphData[] = [];
 
   constructor(private authService: AuthService, private dataService: DataService, public router: Router, private elementRef: ElementRef) { 
     this.htmlElement = elementRef.nativeElement;
@@ -67,11 +53,7 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     await this.refreshUser();
     await this.getTableInvoices();
-    this.getAnalytics();
-    this.initSvg();
-    this.initAxis();
-    this.drawAxis();
-    this.drawLine();
+    await this.getGraphInvoices();
   }
 
   async refreshUser(): Promise<any> {
@@ -87,27 +69,39 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  private getAnalytics() {
-    this.dataService.getRecords("analytics") // need to make an analytics-service.ts and hook up
+  async getGraphInvoices(): Promise<any> {
+    this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "graph")
     .subscribe(
-      results => this.realApiData = results,
+      results => {this.apiData = results;
+                  this.initSvg();
+                  this.initAxis();
+                  this.drawAxis();
+                  this.drawLine();},
       error =>  this.errorMessage = <any>error);
   }
 
-  private initSvg() {
+  async initSvg() {
     this.svg = this.host.select('#chartsvg')
                  .append('svg:g')
                  .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
   }
 
-  private initAxis() {
+  async initAxis() {
     this.x = d3Scale.scaleBand().range([0, this.width]);
     this.y = d3Scale.scaleLinear().range([this.height, 0]);
     this.x.domain(this.apiData.map(function(d) { return d.month; } ));
     this.y.domain(d3Array.extent(this.apiData, function(d) { return d.value; } ));
   }
 
-  private drawAxis() {
+  async drawAxis() {
+
+    var maxTick = 0;
+
+    for(let item of this.apiData) {
+      if (item.value > maxTick) {
+        maxTick = item.value;
+      }
+    }
 
     this.svg.append("svg:g")
           .attr("class", "axis axis--x")
@@ -120,7 +114,7 @@ export class HomeComponent implements OnInit {
           .attr("class", "axis axis--y")
           .attr('transform', 'translate(0,0)')
           .style("font-size", "12")
-          .call(d3Axis.axisLeft(this.y).tickFormat(d3Format.format("d")).ticks(this.apiData.length));
+          .call(d3Axis.axisLeft(this.y).tickFormat(d3Format.format("d")).ticks(maxTick));
 
     this.svg.append("svg:text")
           .attr("class", "x axis-label")
@@ -140,7 +134,7 @@ export class HomeComponent implements OnInit {
           .style("font-size", 20);
   }
 
-  private drawLine() {
+  async drawLine() {
     this.line = d3Shape.line()
                        .curve(d3Shape.curveMonotoneX)
                        .x( (d: any) => this.x(d.month) )
@@ -150,7 +144,7 @@ export class HomeComponent implements OnInit {
             .datum(this.apiData)
             .attr("class", "line")
             .attr("d", this.line)
-            .attr('transform', 'translate(50,0)')
+            .attr('transform', 'translate(25,0)')
             .style("fill", "none")
             .style('stroke', "purple")
             .style("stroke-linecap", "round")
@@ -166,7 +160,7 @@ export class HomeComponent implements OnInit {
             .attr("cx", (d: any) => this.x(d.month))
             .attr("cy", (d: any) => this.y(d.value))
             .attr("r", 5)
-            .attr("transform", "translate(50,0)")
+            .attr("transform", "translate(25,0)")
             .style("fill", "white")
             .style('stroke', "purple")
             .style("stroke-linecap", "round")
