@@ -41,9 +41,12 @@
       <label for="client" class="col-sm-2 control-label">Client</label>
       <div class="col-sm-10">
         <select multiple required ngModel #client="ngModel" class="form-control" id="recordIds" name="recordIds">
-          <option *ngFor="let billingRecord of billingRecords" [ngValue]="billingRecord.id">
-            {{ billingRecord.client.name }} - {{billingRecord.description}} - {{billingRecord.total}}
-          </option>
+          <ng-container *ngFor="let billingRecord of billingRecords">
+            <option  [ngValue]="billingRecord.id" [attr.disabled]="billingRecord.inUse ? '' : null">
+              {{ billingRecord.client.name }} - {{billingRecord.description}} - {{billingRecord.total}}
+            </option>
+            <!-- *ngIf="!billingRecord.inUse" [ngClass]="{'disabled-entry': billingRecord.inUse} -->
+          </ng-container>
         </select>
       </div>
     </div>
