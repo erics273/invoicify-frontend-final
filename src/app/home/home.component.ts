@@ -54,10 +54,6 @@ export class HomeComponent implements OnInit {
     await this.refreshUser();
     await this.getTableInvoices();
     await this.getGraphInvoices();
-    await this.initSvg();
-    await this.initAxis();
-    await this.drawAxis();
-    await this.drawLine();
   }
 
   async refreshUser(): Promise<any> {
@@ -76,7 +72,11 @@ export class HomeComponent implements OnInit {
   async getGraphInvoices(): Promise<any> {
     this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "graph")
     .subscribe(
-      results => console.log(results),
+      results => {this.apiData = results;
+                  this.initSvg();
+                  this.initAxis();
+                  this.drawAxis();
+                  this.drawLine();},
       error =>  this.errorMessage = <any>error);
   }
 
@@ -95,6 +95,14 @@ export class HomeComponent implements OnInit {
 
   async drawAxis() {
 
+    var maxTick = 0;
+
+    for(let item of this.apiData) {
+      if (item.value > maxTick) {
+        maxTick = item.value;
+      }
+    }
+
     this.svg.append("svg:g")
           .attr("class", "axis axis--x")
           .attr("transform", "translate(0," + this.height + ")")
@@ -106,7 +114,7 @@ export class HomeComponent implements OnInit {
           .attr("class", "axis axis--y")
           .attr('transform', 'translate(0,0)')
           .style("font-size", "12")
-          .call(d3Axis.axisLeft(this.y).tickFormat(d3Format.format("d")).ticks(this.apiData.length));
+          .call(d3Axis.axisLeft(this.y).tickFormat(d3Format.format("d")).ticks(maxTick));
 
     this.svg.append("svg:text")
           .attr("class", "x axis-label")
@@ -136,7 +144,7 @@ export class HomeComponent implements OnInit {
             .datum(this.apiData)
             .attr("class", "line")
             .attr("d", this.line)
-            .attr('transform', 'translate(50,0)')
+            .attr('transform', 'translate(25,0)')
             .style("fill", "none")
             .style('stroke', "purple")
             .style("stroke-linecap", "round")
@@ -152,7 +160,7 @@ export class HomeComponent implements OnInit {
             .attr("cx", (d: any) => this.x(d.month))
             .attr("cy", (d: any) => this.y(d.value))
             .attr("r", 5)
-            .attr("transform", "translate(50,0)")
+            .attr("transform", "translate(25,0)")
             .style("fill", "white")
             .style('stroke', "purple")
             .style("stroke-linecap", "round")
