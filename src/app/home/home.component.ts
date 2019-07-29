@@ -20,16 +20,16 @@ export class HomeComponent implements OnInit {
 
   constructor(private authService: AuthService, private dataService: DataService,public router: Router) { }
 
-  ngOnInit() {
-    this.refreshUser();
-    this.getTableInvoices();
+  async ngOnInit() {
+    await this.refreshUser();
+    await this.getTableInvoices();
   }
 
-  refreshUser(){
+  async refreshUser(): Promise<any> {
     this.auth_user = JSON.parse(localStorage.getItem("auth_user"));
   }
 
-  getTableInvoices() {
+  async getTableInvoices(): Promise<any> {
     this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "table")
     .subscribe(
       results => this.invoices = results,
