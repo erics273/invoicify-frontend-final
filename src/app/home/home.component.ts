@@ -1,5 +1,4 @@
 import { ElementRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { fadeInAnimation } from '../animations/fade-in.animation';
 import { AuthService } from 'app/auth.service';
 import { DataService } from '../data.service';
@@ -80,10 +79,12 @@ export class HomeComponent implements OnInit {
   }
 
   async getTableInvoices(): Promise<any> {
-    this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "table")
-    .subscribe(
-      results => this.invoices = results,
-      error =>  this.errorMessage = <any>error);
+    if (this.auth_user != null) {
+      this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "table")
+        .subscribe(
+          results => this.invoices = results,
+          error =>  this.errorMessage = <any>error);
+    }
   }
 
   private getAnalytics() {
