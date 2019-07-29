@@ -12,6 +12,11 @@ import * as d3Format from "d3-format"
 import * as d3Transition from "d3-transition";
 import 'svg-builder';
 
+export class GraphData {
+  month: string;
+  value: number;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -36,7 +41,7 @@ export class HomeComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   invoices: any[];
-  apiData: any[];
+  apiData: GraphData[] = [];
 
   constructor(private authService: AuthService, private dataService: DataService, public router: Router, private elementRef: ElementRef) { 
     this.htmlElement = elementRef.nativeElement;
@@ -71,7 +76,7 @@ export class HomeComponent implements OnInit {
   async getGraphInvoices(): Promise<any> {
     this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "graph")
     .subscribe(
-      results => this.apiData = results,
+      results => console.log(results),
       error =>  this.errorMessage = <any>error);
   }
 
