@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { fadeInAnimation } from '../animations/fade-in.animation';
-import { DataService } from '../data.service'
 import { AuthService } from 'app/auth.service';
 import { Router } from '@angular/router';
 
@@ -15,10 +14,8 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   auth_user;
-  errorMessage: string;
-  invoices: any[];
 
-  constructor(private authService: AuthService, private dataService: DataService,public router: Router) { }
+  constructor(private authService: AuthService, public router: Router) { }
 
   async ngOnInit() {
     await this.refreshUser();
@@ -35,5 +32,4 @@ export class HomeComponent implements OnInit {
       results => this.invoices = results,
       error =>  this.errorMessage = <any>error);
   }
-
 }
