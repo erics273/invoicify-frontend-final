@@ -82,13 +82,13 @@ export class HomeComponent implements OnInit {
       this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "graph")
       .subscribe(
         results => {this.apiData = results;
-                    this.graphService.drawGraph(this.apiData, this.htmlElement)},
+                    this.graphService.drawGraph(this.apiData, "#chartsvg", this.htmlElement)},
         error =>  this.errorMessage = <any>error);
     } else { // Company Performance Graph
       this.dataService.getHomeCompanyRecords("analytics")
       .subscribe(
         results => {this.apiData = results;
-                    this.graphService.drawGraph(this.apiData, this.htmlElement)},
+                    this.graphService.drawGraph(this.apiData, "#chartsvg", this.htmlElement)},
         error =>  this.errorMessage = <any>error);
     }
   }

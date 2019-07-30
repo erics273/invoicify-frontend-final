@@ -35,17 +35,17 @@ export class GraphService {
     this.height = 470 - this.margin.top - this.margin.bottom;
   }
 
-  async drawGraph(graphData: GraphData[], htmlElement: HTMLElement) {
+  async drawGraph(graphData: GraphData[], hostId: string, htmlElement: HTMLElement) {
     this.apiData = graphData;
     this.host = d3.select(htmlElement);
-    this.initSvg();
+    this.initSvg(hostId);
     this.initAxis();
     this.drawAxis();
     this.drawLine();
   }
 
-  async initSvg() {
-    this.svg = this.host.select('#chartsvg')
+  async initSvg(hostId: string) {
+    this.svg = this.host.select(hostId)
                  .append('svg:g')
                  .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
   }
