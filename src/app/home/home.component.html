@@ -27,6 +27,7 @@
   </table>
 
   <h2 id="graphHeader" *ngIf="authService.isAuthenticated()"><b>Personal Performance</b></h2>
+  <h2 id="graphHeader2" *ngIf="!authService.isAuthenticated()"><b>Company Performance</b></h2>
   <body>
       <div id="main">
           <p class="label"></p>

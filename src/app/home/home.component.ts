@@ -70,14 +70,26 @@ export class HomeComponent implements OnInit {
   }
 
   async getGraphInvoices(): Promise<any> {
-    this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "graph")
-    .subscribe(
-      results => {this.apiData = results;
-                  this.initSvg();
-                  this.initAxis();
-                  this.drawAxis();
-                  this.drawLine();},
-      error =>  this.errorMessage = <any>error);
+    if (this.auth_user != null) { // Personal Performance Graph
+      this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "graph")
+      .subscribe(
+        results => {this.apiData = results;
+                    this.initSvg();
+                    this.initAxis();
+                    this.drawAxis();
+                    this.drawLine();},
+        error =>  this.errorMessage = <any>error);
+    } else { // Company Performance Graph
+      this.dataService.getHomeCompanyRecords("analytics")
+      .subscribe(
+        results => {this.apiData = results;
+                    console.log(this.apiData);
+                    this.initSvg();
+                    this.initAxis();
+                    this.drawAxis();
+                    this.drawLine();},
+        error =>  this.errorMessage = <any>error);
+    }
   }
 
   async initSvg() {
@@ -95,7 +107,7 @@ export class HomeComponent implements OnInit {
 
   async drawAxis() {
 
-    var maxTick = 0;
+    var maxTick = 1;
 
     for(let item of this.apiData) {
       if (item.value > maxTick) {
