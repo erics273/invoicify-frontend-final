@@ -1,8 +1,9 @@
 <section @fadeInAnimation>
 
-  <h2 id="upcomingHeader" style="font-size: 24px;" *ngIf="authService.isAuthenticated()"><b>Your Upcoming Invoices</b></h2>
+  <h2 id="upcomingHeader" style="margin-bottom: 10px;font-size: 24px;" *ngIf="authService.isAuthenticated()"><b>Your Upcoming Invoices</b></h2>
 
   <ag-grid-angular
+  *ngIf="authService.isAuthenticated()"
   style="width: auto; height: auto;"
   class="ag-theme-balham"
   [rowData]="rowData"
@@ -12,7 +13,7 @@
   ></ag-grid-angular>
 
 
-  <h2 id="graphHeader" style="margin-bottom: 10px;font-size: 24px;" *ngIf="authService.isAuthenticated()"><b>Personal Performance</b></h2>
+  <h2 id="graphHeader" style="margin-bottom: 10px;margin-top: 10px;font-size: 24px;" *ngIf="authService.isAuthenticated()"><b>Personal Performance</b></h2>
   <h2 id="graphHeader2" style="margin-bottom: 10px;font-size: 24px;" *ngIf="!authService.isAuthenticated()"><b>Company Performance</b></h2>
   <body>
       <div id="main">
