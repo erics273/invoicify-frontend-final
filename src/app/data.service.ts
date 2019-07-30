@@ -33,6 +33,12 @@ export class DataService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    getHomeCompanyRecords(endpoint: string): Observable<any[]> {
+        let apiUrl = `${this.baseUrl}${endpoint}`;
+        return this.http.get(apiUrl, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
 
     getRecord(endpoint: string, id:number): Observable<object> {
         let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
