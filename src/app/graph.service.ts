@@ -160,8 +160,8 @@ export class GraphService {
 
     this.user_svg.append("svg:text")
           .attr("class", "x axis-label")
-          .attr("x", this.user_height/2 + this.user_margin.left)
-          .attr("y", this.user_width/2 + this.user_margin.bottom*3 + this.user_margin.top*3 + 10)
+          .attr("x", this.height/2 + this.margin.left)
+          .attr("y", this.width/2 + this.margin.bottom*2 + this.margin.top + 10)
           .text("Month")
           .style('font-weight', "bold")
           .style("font-size", 20);
