@@ -42,9 +42,8 @@ export class AnalyticsComponent implements OnInit {
   async ngOnInit() {
     await this.refreshUser();
     await this.getCompanies();
-   //await this.getTableInvoices();
-    await this.getClientGraphInvoices();
     await this.getUserGraphInvoices();
+    await this.getClientGraphInvoices();
   }
 
   async refreshUser(): Promise<any> {
@@ -66,10 +65,10 @@ export class AnalyticsComponent implements OnInit {
   }
 
   private getClientGraphInvoices() {
+    var svg: any;
     this.dataService.getRecordsId("analytics/client", this.clientId)
     .subscribe(
       results => {this.apiData = results;
-        console.log(this.apiData);
                   this.graphService.drawGraph(this.apiData, "#chartsvg", this.htmlElement);},
       error =>  this.errorMessage = <any>error);
   }
@@ -79,8 +78,7 @@ export class AnalyticsComponent implements OnInit {
     this.dataService.getHomeRecords("analytics/client", this.clientId, tempString)
     .subscribe(
       results => {this.apiData = results;
-                  console.log(this.apiData);
-                  this.graphService.drawGraph(this.apiData, "#usersvg", this.htmlElement);},
+                  this.graphService.drawUserGraph(this.apiData, this.htmlElement);},
       error =>  this.errorMessage = <any>error);
   }
 }
