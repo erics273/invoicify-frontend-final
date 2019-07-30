@@ -1,20 +1,20 @@
 <section @fadeInAnimation>
   <ol class="breadcrumb">
       <li><a routerLink="/home">Home</a></li>
-      <li><a routerLink="/company">Companies</a></li>
-      <li class="active"><b>Manage Company</b></li>
+      <li><a routerLink="/company">Clients</a></li>
+      <li class="active"><b>Add Client</b></li>
   </ol>
 
-  <a class="btn btn-primary" routerLink="/company" style="position: relative;right:-600px;margin-bottom:30px;">Return to Companies</a>
+  <a class="btn btn-primary" routerLink="/company" style="position: relative;right:-600px;margin-bottom:30px;">Return to Clients</a>
 
-  <h1 style="margin-bottom: 10px;font-size: 24px;"><b>Manage Companies</b></h1>
+  <h1 style="margin-bottom: 10px;font-size: 24px;"><b>Add Client</b></h1>
 
   <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
 
   <form novalidate (ngSubmit)="saveCompany(companyForm)"  #companyForm="ngForm" class="form-horizontal">
     <input [ngModel]="company?.id" ngModel #company_id="ngModel" type="hidden" name="id">
     <div class="form-group">
-      <label for="name" class="col-sm-2 control-label">Company Name</label>
+      <label for="name" class="col-sm-2 control-label">Client Name</label>
       <div class="col-sm-10">
         <input [ngModel]="company?.name" ngModel #name="ngModel" type="text" class="form-control" id="name" name="name" placeholder="Company Name" required minlength="2" maxlength="30">
          <span *ngIf="formErrors.name" class="text-danger">
