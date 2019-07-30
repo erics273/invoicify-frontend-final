@@ -2,12 +2,12 @@
   <ol class="breadcrumb">
       <li><a routerLink="/home">Home</a></li>
       <li><a routerLink="/company">Companies</a></li>
-      <li class="active">Manage Company</li>
+      <li class="active"><b>Manage Company</b></li>
   </ol>
 
-  <a class="btn btn-primary" routerLink="/company">Return to Companies</a>
+  <a class="btn btn-primary" routerLink="/company" style="position: relative;right:-600px;margin-bottom:30px;">Return to Companies</a>
 
-  <h1>Manage Companies</h1>
+  <h1 style="margin-bottom: 10px;font-size: 24px;"><b>Manage Companies</b></h1>
 
   <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
 
@@ -29,3 +29,9 @@
     </div>
   </form>
 </section>
+
+<style>
+    li{
+        display: inline-flex; 
+      }
+</style>

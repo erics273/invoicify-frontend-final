@@ -1,14 +1,14 @@
 <section @fadeInAnimation>
   <ol class="breadcrumb">
       <li><a routerLink="/home">Home</a></li>
-      <li class="active">Billing Records</li>
+      <li class="active"><b>Billing Records</b></li>
   </ol>
 
   <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
 
-  <h2>Billing Records</h2>
+  <h2 style="margin-bottom: 10px;font-size: 24px;"><b>Billing Records</b></h2>
 
-  <a class="btn btn-primary" routerLink="/billing-record/add">Add Billing Record</a>
+  <a class="btn btn-primary" routerLink="/billing-record/add" style="position: relative;right:-600px;margin-bottom: 10px;">Add Billing Record</a>
   <ag-grid-angular
     style="width: auto; height: 60vh;"
     class="ag-theme-balham"
@@ -21,7 +21,7 @@
 </section>
 
 <style>
-li{
-  display: inline-block;
-}
-</style>
+    li{
+        display: inline-flex;
+      }
+    </style>

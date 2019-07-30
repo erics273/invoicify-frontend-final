@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
   successMessage: string;
   invoices: any[];
   apiData: GraphData[] = [];
+
   gridApi: any;
   gridColumnApi: any;
 
@@ -243,8 +244,8 @@ export class HomeComponent implements OnInit {
             .style('fill', 'white')
 
     var t = d3Transition.transition()
-            .delay(750)
-            .duration(6000);
+            .delay(250)
+            .duration(3000);
     t.select('rect.curtain')
             .attr('width', 0);
   }

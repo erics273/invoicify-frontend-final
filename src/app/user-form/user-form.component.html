@@ -6,12 +6,12 @@
     <li>
       <a routerLink="/user">Users</a>
     </li>
-    <li class="active">Manage User</li>
+    <li class="active"><b>Manage User</b></li>
   </ol>
 
-  <a class="btn btn-primary" routerLink="/user">Return to Users</a>
+  <a class="btn btn-primary" routerLink="/user" style="position: relative;right:-600px;margin-bottom: 10px;">Return to Users</a>
 
-  <h1>Manage User</h1>
+  <h1 style="margin-bottom: 10px;font-size: 24px;"><b>Manage User</b></h1>
 
   <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
 
@@ -44,3 +44,9 @@
     </div>
   </form>
 </section>
+
+<style>
+    li{
+        display: inline-flex;
+      }
+</style>
