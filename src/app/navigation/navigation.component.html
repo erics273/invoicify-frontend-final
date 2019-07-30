@@ -28,8 +28,10 @@
         
         <div id="navbar" class="navbar-collapse collapse">
            
-            <ul class="nav navbar-nav">
-                <img src="assets/images/allylogo.png" alt = "Ally" height = "150px" width="150px" style = "float:left;position:absolute;left:15%;top:15%; margin-right:10px;"/>
+            <ul class="nav navbar-nav" style="margin-left: 200px">
+                <a class="navbar-logo" routerLink="/home">
+                    <img src="assets/images/allylogo.png" alt = "Ally" height = "150px" width="150px" style = "float:left;position:absolute;left:15%;top:15%;margin-left:75px;"/>
+                </a>
                 <li routerLinkActive="active">
                     <a routerLink="/home">Home</a>
                 </li>
@@ -60,6 +62,9 @@
 <style>
 .navbar{
     margin-left: 0px;
+}
+.navbar li:active {
+    background-color: purple;
 }
 
 </style>
