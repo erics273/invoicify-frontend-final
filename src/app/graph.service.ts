@@ -35,6 +35,10 @@ export class GraphService {
     this.height = 470 - this.margin.top - this.margin.bottom;
   }
 
+  async clearGraph() {
+    d3.selectAll("svg > *").remove();
+  }
+
   async drawGraph(graphData: GraphData[], hostId: string, htmlElement: HTMLElement) {
     this.apiData = graphData;
     this.host = d3.select(htmlElement);

@@ -2,15 +2,12 @@ import { ElementRef, Component, OnInit } from '@angular/core';
 import { DataService } from 'app/data.service'
 import { ActivatedRoute } from '@angular/router';
 import { fadeInAnimation } from 'app/animations/fade-in.animation';
-import * as d3 from 'd3-selection';
-import * as d3Scale from "d3-scale";
-import * as d3Shape from "d3-shape";
-import * as d3Array from "d3-array";
-import * as d3Axis from "d3-axis";
-import * as d3Format from "d3-format"
-import * as d3Transition from "d3-transition";
-import 'svg-builder';
 import { GraphService } from 'app/graph.service';
+
+export class GraphData {
+  month: string;
+  value: number;
+}
 
 // TODO:
 // - Get text tooltip to show up in the right place
@@ -26,26 +23,39 @@ import { GraphService } from 'app/graph.service';
   animations: [fadeInAnimation]
 
 })
+
 export class AnalyticsComponent implements OnInit {
   private htmlElement: HTMLElement;
-  private host: d3.Selection<HTMLElement, any, any, any>;
 
-  private htmlElement2: HTMLElement; 
-
-  realApiData: any[];
+  auth_user;
+  apiData: GraphData[] = [];
   errorMessage: string;
   successMessage: string;
   companies: any[];
+  clientId: number = 0;
 
-  constructor(private elementRef: ElementRef, private dataService: DataService, private route: ActivatedRoute) {
+  constructor(private elementRef: ElementRef, private graphService: GraphService, private dataService: DataService, private route: ActivatedRoute) {
     this.htmlElement = elementRef.nativeElement;
     
   }
 
   async ngOnInit() {
+    await this.refreshUser();
     await this.getCompanies();
    //await this.getTableInvoices();
-    await this.getGraphInvoices();
+    await this.getClientGraphInvoices();
+    await this.getUserGraphInvoices();
+  }
+
+  async refreshUser(): Promise<any> {
+    this.auth_user = JSON.parse(localStorage.getItem("auth_user"));
+  }
+
+  setClientId(event: any) {
+    this.clientId = event.target.value.split(" ").pop();
+    this.graphService.clearGraph();
+    this.getClientGraphInvoices();
+    this.getUserGraphInvoices();
   }
 
   private getCompanies() {
@@ -55,10 +65,22 @@ export class AnalyticsComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
-  private getGraphInvoices() {
-    this.dataService.getRecords("analytics/client") // need to make an analytics-service.ts and hook up
+  private getClientGraphInvoices() {
+    this.dataService.getRecordsId("analytics/client", this.clientId)
     .subscribe(
-      results => this.realApiData = results,
+      results => {this.apiData = results;
+        console.log(this.apiData);
+                  this.graphService.drawGraph(this.apiData, "#chartsvg", this.htmlElement);},
+      error =>  this.errorMessage = <any>error);
+  }
+
+  private getUserGraphInvoices() {
+    var tempString = "?user-id=" + this.auth_user.id;
+    this.dataService.getHomeRecords("analytics/client", this.clientId, tempString)
+    .subscribe(
+      results => {this.apiData = results;
+                  console.log(this.apiData);
+                  this.graphService.drawGraph(this.apiData, "#usersvg", this.htmlElement);},
       error =>  this.errorMessage = <any>error);
   }
 }

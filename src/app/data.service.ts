@@ -28,7 +28,7 @@ export class DataService {
     }
 
     getHomeRecords(endpoint: string, id: number, data: string): Observable<any[]> {
-        let apiUrl = `${this.baseUrl}${endpoint}/${id}/${data}`;
+        let apiUrl = `${this.baseUrl}${endpoint}/${id}${data}`;
         return this.http.get(apiUrl, this.options)
             .map(this.extractData)
             .catch(this.handleError);

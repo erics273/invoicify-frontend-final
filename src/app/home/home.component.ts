@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
 
   async getTableInvoices(): Promise<any> {
     if (this.auth_user != null) {
-      this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "table")
+      this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "/table")
         .subscribe(
           results => {
             this.rowData = results
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
 
   async getGraphInvoices(): Promise<any> {
     if (this.auth_user != null) { // Personal Performance Graph
-      this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "graph")
+      this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "/graph")
       .subscribe(
         results => {this.apiData = results;
                     this.graphService.drawGraph(this.apiData, "#chartsvg", this.htmlElement)},
