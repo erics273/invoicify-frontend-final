@@ -38,9 +38,9 @@ export class BillingRecordComponent implements OnInit {
     this.columnDefs = [
       {headerName: 'ID', field: 'id', sortable: true, filter: true, resizable: true},
       {headerName: 'Description', field: 'description', sortable: true, filter: true, resizable: true},
-      {headerName: 'Client', field: 'client', sortable: true, filter: true, resizable: true},
+      {headerName: 'Client', field: 'client.name', sortable: true, filter: true, resizable: true},
       {headerName: 'Type', field: 'type', sortable: true, filter: true, resizable: true},
-      {headerName: 'Created By', field: 'createdBy', sortable: true, filter: true, resizable: true},
+      {headerName: 'Created By', field: 'createdBy.username', sortable: true, filter: true, resizable: true},
       {headerName: 'Total', field: 'total', sortable: true, filter: true, resizable: true},
 
     ];
@@ -66,8 +66,6 @@ export class BillingRecordComponent implements OnInit {
       // .do(data => console.log(data))
       .map(results => {
         results.forEach( r =>{
-          r.client = r.client.name;
-          r.createdBy = r.createdBy.username;
           r.type = (r.rate && r.quantity) ? "Rate Based" : "Flat Fee";
         })
         return results;
