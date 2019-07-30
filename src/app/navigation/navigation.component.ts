@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { HomeComponent } from 'app/home/home.component';
 
 @Component({
   selector: 'app-navigation',
