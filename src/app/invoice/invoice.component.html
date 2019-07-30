@@ -1,12 +1,12 @@
 <section @fadeInAnimation>
     <ol class="breadcrumb">
         <li><a routerLink="/home">Home</a></li>
-        <li class="active">Invoices</li>
+        <li class="active"><b>Invoices</b></li>
     </ol>
   
     <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
   
-    <h2>Manage Invoices</h2>
+    <h2 style="margin-bottom: 10px;font-size: 24px;"><b>Invoices</b></h2>
   
     <a class="btn btn-primary" routerLink="/invoice/add">Add Invoice</a>
   
