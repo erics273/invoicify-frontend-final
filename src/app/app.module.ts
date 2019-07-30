@@ -5,6 +5,7 @@ import { RouterModule }   from '@angular/router';
 import { MatDialogModule } from '@angular/material';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -42,6 +43,7 @@ import { AnalyticsComponent } from './analytics/analytics.component';
     InvoiceFormComponent,
     InvoiceComponent,
     AnalyticsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { AnalyticsComponent } from './analytics/analytics.component';
     HttpModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    AgGridModule.withComponents([])
   ],
   entryComponents: [DeleteConfirmComponent],
   providers: [DataService, AuthGuard, AuthService],
