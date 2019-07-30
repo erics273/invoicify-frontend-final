@@ -42,13 +42,36 @@ export class HomeComponent implements OnInit {
   successMessage: string;
   invoices: any[];
   apiData: GraphData[] = [];
+  gridApi: any;
+  gridColumnApi: any;
 
-  constructor(private authService: AuthService, private dataService: DataService, public router: Router, private elementRef: ElementRef) { 
+  constructor(private authService: AuthService, private dataService: DataService, public router: Router, private elementRef: ElementRef) {
     this.htmlElement = elementRef.nativeElement;
     this.host = d3.select(this.htmlElement);
     this.width = 700 - this.margin.left - this.margin.right;
     this.height = 470 - this.margin.top - this.margin.bottom;
   }
+
+  columnDefs = [
+    {headerName: "ID", field: "id", sortable: true, filter: true, resizable: true, width: 120},
+    {headerName: "Description", field: "invoiceDescription", sortable: true, filter: true, resizable: true},
+    {headerName: "Client", field: "company.name", sortable: true, filter: true, resizable: true},
+    {headerName: "Line Items", field: "lineItems.length", sortable: true, filter: true, resizable: true},
+    {headerName: "Created By", field: "createdBy.username", sortable: true, filter: true, resizable: true},
+    {headerName: "Created On", field: "createdOn", sortable: true, filter: true, resizable: true},
+    {headerName: "Status", field: "status", sortable: true, filter: true, resizable: true}
+  ]
+  rowData = [
+
+  ]
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    this.gridApi.sizeColumnsToFit();
+    this.gridColumnApi.autoSizeColumns();
+    this.gridColumnApi.getColumn("id").setSort("asc");
+    }
 
   async ngOnInit() {
     await this.refreshUser();
@@ -64,7 +87,10 @@ export class HomeComponent implements OnInit {
     if (this.auth_user != null) {
       this.dataService.getHomeRecords("analytics/user", this.auth_user.id, "table")
         .subscribe(
-          results => this.invoices = results,
+          results => {
+            this.rowData = results
+            this.invoices = results
+          },
           error =>  this.errorMessage = <any>error);
     }
   }
