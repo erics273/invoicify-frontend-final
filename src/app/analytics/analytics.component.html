@@ -1,11 +1,11 @@
 <section @fadeInAnimation>
     <ol class="breadcrumb">
         <li><a routerLink="/home">Home</a></li>
-        <li class="active">Analytics</li>
+        <li class="active"><b>Analytics</b></li>
       </ol>
 
     <div class="form-group">
-      <label for="client" class="col-sm-2 control-label">Client</label>
+      <label for="client" class="col-sm-2 control-label" style="margin-top: 3px;font-size: 18px;">Client</label>
       <div class="col-sm-10">
         <select required [ngModel]="null" ngModel #client="ngModel" class="form-control" id="client" name="client">
           <option [ngValue]="null">-- Select Client --</option>
@@ -26,7 +26,7 @@
 
 <body>
     <div id="main" style = "margin-bottom: 50px;">
-        <h2 style="font-weight: bold">Client Analytics</h2>
+        <h2 style="font-weight: bold;margin-bottom: 10px;margin-top: 80px;font-size: 24px;">Client Analytics</h2>
         <p class="label"></p>
         <svg id="chartsvg" width="700" height="500" style="border: 1px solid #777;">
         </svg>

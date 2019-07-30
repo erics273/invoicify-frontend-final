@@ -1,5 +1,5 @@
 <section @fadeInAnimation>
-  <h2 id="upcomingHeader" *ngIf="authService.isAuthenticated()"><b>Your Upcoming Invoices</b></h2>
+  <h2 id="upcomingHeader" style="font-size: 24px;" *ngIf="authService.isAuthenticated()"><b>Your Upcoming Invoices</b></h2>
   <table class="table table-striped table-bordered" id="dataTable" style="width:100%"
           *ngIf="authService.isAuthenticated()" routerLinkActive="active">
     <thead>
@@ -26,8 +26,8 @@
     </tbody>
   </table>
 
-  <h2 id="graphHeader" *ngIf="authService.isAuthenticated()"><b>Personal Performance</b></h2>
-  <h2 id="graphHeader2" *ngIf="!authService.isAuthenticated()"><b>Company Performance</b></h2>
+  <h2 id="graphHeader" style="margin-bottom: 10px;font-size: 24px;" *ngIf="authService.isAuthenticated()"><b>Personal Performance</b></h2>
+  <h2 id="graphHeader2" style="margin-bottom: 10px;font-size: 24px;" *ngIf="!authService.isAuthenticated()"><b>Company Performance</b></h2>
   <body>
       <div id="main">
           <p class="label"></p>
