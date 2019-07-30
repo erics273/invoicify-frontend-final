@@ -21,7 +21,7 @@ export class InvoiceComponent implements OnInit {
   constructor (private dataService: DataService) {}
 
   columnDefs = [
-    {headerName: "ID", field: "id", sortable: true, filter: true, resizable: true},
+    {headerName: "ID", field: "id", sortable: true, filter: true, resizable: true, width: 120},
     {headerName: "Description", field: "invoiceDescription", sortable: true, filter: true, resizable: true},
     {headerName: "Client", field: "company.name", sortable: true, filter: true, resizable: true},
     {headerName: "Line Items", field: "lineItems.length", sortable: true, filter: true, resizable: true},
@@ -37,6 +37,7 @@ export class InvoiceComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
+    this.gridColumnApi.getColumn("id").setSort("asc");
     }
 
   ngOnInit() { this.getInvoices(); }

@@ -36,7 +36,7 @@ export class BillingRecordComponent implements OnInit {
 
   constructor (private dataService: DataService, public dialog: MatDialog) {
     this.columnDefs = [
-      {headerName: 'ID', field: 'id', sortable: true, filter: true, resizable: true},
+      {headerName: 'ID', field: 'id', sortable: true, filter: true, resizable: true, width: 120 },
       {headerName: 'Description', field: 'description', sortable: true, filter: true, resizable: true},
       {headerName: 'Client', field: 'client.name', sortable: true, filter: true, resizable: true},
       {headerName: 'Type', field: 'type', sortable: true, filter: true, resizable: true},
@@ -55,6 +55,7 @@ export class BillingRecordComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
+    this.gridColumnApi.getColumn("id").setSort("asc")
     }
 
   populateRowData() {
