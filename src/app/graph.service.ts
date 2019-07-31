@@ -313,8 +313,8 @@ export class GraphService {
     }
 
     var user_curtain = this.user_svg.append("svg:rect")
-            .attr('x', -1 * this.user_width)
-            .attr('y', -1 * this.user_height)
+            .attr('x', -1 * this.user_width - 10)
+            .attr('y', -1 * this.user_height - 10)
             .attr('height', this.user_height + 20)
             .attr('width', this.user_width + 5)
             .attr('class', 'user_curtain')
