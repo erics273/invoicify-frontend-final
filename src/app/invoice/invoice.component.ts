@@ -26,8 +26,7 @@ export class InvoiceComponent implements OnInit {
     {headerName: "Client", field: "company.name", sortable: true, filter: true, resizable: true},
     {headerName: "Line Items", field: "lineItems.length", sortable: true, filter: true, resizable: true},
     {headerName: "Created By", field: "createdBy.username", sortable: true, filter: true, resizable: true},
-    {headerName: "Created On", field: "createdOn", sortable: true, filter: true, resizable: true},
-    {headerName: "Status", field: "status", sortable: true, filter: true, resizable: true}
+    {headerName: "Created On", field: "createdOn", sortable: true, filter: true, resizable: true}
   ]
   rowData = [
 
