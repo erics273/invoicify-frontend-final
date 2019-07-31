@@ -96,13 +96,7 @@ export class GraphService {
 
   async drawAxis() {
 
-    var maxTick = 1;
-
-    for(let item of this.apiData) {
-      if (item.value > maxTick) {
-        maxTick = item.value;
-      }
-    }
+    var maxTick = Math.max.apply(Math, this.apiData.map(function (v) {return v.value; }));
 
     this.svg.append("svg:g")
           .attr("class", "axis axis--x")
@@ -137,13 +131,7 @@ export class GraphService {
 
   async drawUserAxis() {
 
-    var maxTick = 1;
-
-    for(let item of this.apiData) {
-      if (item.value > maxTick) {
-        maxTick = item.value;
-      }
-    }
+    var maxTick = Math.max.apply(Math, this.apiData.map(function (v) {return v.value; }));
     
     this.user_svg.append("svg:g")
           .attr("class", "axis axis--x")
